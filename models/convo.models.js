@@ -11,7 +11,7 @@ const convoModel = new mongoose.Schema(
     messages: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Massages",
+        ref: "Message",
       },
     ],
   },

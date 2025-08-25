@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import userRoute from "./routes/user.route.js"
+import messageRoute from "./routes/message.route.js"
 import cookieParser from "cookie-parser";
 dotenv.config({});
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use("/api/user",userRoute);
+app.use("/api/message",messageRoute);
 
 app.listen(PORT,()=>{
     connectDB();

@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 const isAuthenticated = (req, res, next) => {
   try {
-  const token = req.cookies?.token; // safer with optional chaining
+    const token = req.cookies?.token; // safer with optional chaining
     if (!token) {
       return res.status(401).json({ message: "Unauthorized tokn vnai" });
     }
