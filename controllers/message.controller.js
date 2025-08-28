@@ -1,3 +1,4 @@
+import { getReceiverSocketId, io } from "../index.js";
 import { Convo } from "../models/convo.models.js";
 import { Message } from "../models/message.model.js";
 
@@ -25,9 +26,14 @@ const sendMessage = async (req, res) => {
       convoExists.messages.push(newMessage._id);
     }
     await convoExists.save();
+    await newMessage.save();
+    await Promise.all([convoExists.save(), newMessage.save()]);
     // socket io
-
-    return res.status(201).json({ message: "Message sent successfully" });
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
+    return res.status(201).json({ message: "Message sent successfully", newMessage });
   } catch (error) {
     res.status(500).json({ message: error.message || "Server error" });
   }

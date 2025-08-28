@@ -85,7 +85,7 @@ const getOtherUsers = async (req, res) => {
     res
       .status(200)
       .json({ message: "Other users fetched successfully", otherUsers });
-      console.log(otherUsers);
+      // console.log(otherUsers);
   } catch (error) {
     res.status(500).json({ message: error.message || "Server error" });
   }
